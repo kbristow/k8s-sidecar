@@ -2,7 +2,7 @@ import os
 
 from kubernetes import client, config
 
-from resources import listResources, watchForChanges
+from .resources import listResources, watchForChanges
 
 
 def main():

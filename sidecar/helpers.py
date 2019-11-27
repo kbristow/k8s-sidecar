@@ -2,8 +2,8 @@ import os
 import errno
 
 import requests
-from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
+from urllib3 import Retry
 
 
 def writeTextToFile(folder, filename, data):

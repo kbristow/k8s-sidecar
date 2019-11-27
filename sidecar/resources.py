@@ -7,7 +7,7 @@ from kubernetes import client, watch
 from kubernetes.client.rest import ApiException
 from urllib3.exceptions import ProtocolError
 
-from helpers import request, writeTextToFile, removeFile
+from .helpers import request, writeTextToFile, removeFile
 
 _list_namespaced = {
     "secret": "list_namespaced_secret",
