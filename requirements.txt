@@ -1,3 +1,4 @@
+ruamel.yaml==0.16.5
 urllib3
 kubernetes==10.0.0
 requests==2.22.0

@@ -1,6 +1,7 @@
 import base64
 import os
 from multiprocessing import Process
+from os import path
 from time import sleep
 
 from kubernetes import client, watch
@@ -8,6 +9,7 @@ from kubernetes.client.rest import ApiException
 from urllib3.exceptions import ProtocolError
 
 from .helpers import request, writeTextToFile, removeFile
+from .merge import merge_hooks
 
 _list_namespaced = {
     "secret": "list_namespaced_secret",
@@ -104,6 +106,8 @@ def _watch_resource_iterator(label, targetFolder, url, method, payload,
                     filename, filedata = _get_file_data_and_name(data_key, dataMap[data_key],
                                                                  resource)
                     writeTextToFile(destFolder, filename, filedata)
+
+                    merge_hooks(destFolder, filename)
 
                     if url is not None:
                         request(url, method, payload)
