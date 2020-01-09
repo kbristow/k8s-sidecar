@@ -103,11 +103,13 @@ def _watch_resource_iterator(label, targetFolder, url, method, payload,
                 print(f"File in {resource} {data_key} {eventType}")
 
                 if (eventType == "ADDED") or (eventType == "MODIFIED"):
+
                     filename, filedata = _get_file_data_and_name(data_key, dataMap[data_key],
                                                                  resource)
+
                     writeTextToFile(destFolder, filename, filedata)
 
-                    merge_hooks(destFolder, filename)
+                    merge_hooks(targetFolder, destFolder, filename)
 
                     if url is not None:
                         request(url, method, payload)
@@ -135,7 +137,6 @@ def _watch_resource_loop(*args):
 
 def watchForChanges(label, targetFolder, url, method, payload,
                     current, folderAnnotation, resources):
-
     firstProc = Process(target=_watch_resource_loop,
                         args=(label, targetFolder, url, method, payload,
                               current, folderAnnotation, resources[0])
