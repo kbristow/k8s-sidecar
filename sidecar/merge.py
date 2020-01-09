@@ -5,14 +5,16 @@ from ruamel import yaml
 
 
 def _merge_yaml(default_target_dir, dest_dir, updated_filename):
+    # merge string in the format base1,base2>output1;base3,base4>output2
     full_merge_string = os.getenv("MERGE_YAML")
     if full_merge_string is not None:
         merge_strings = full_merge_string.split(";")
         for merge_string in merge_strings:
-            if len(merge_string) is not 0:
+            if len(merge_string) != 0:
                 base_files = merge_string.split(">")[0].split(",")
                 out_file = merge_string.split(">")[1]
 
+                # Only merge if the file that was updated is one of the base yaml files
                 if updated_filename in base_files:
                     all_file_objects = []
                     for file in base_files:
@@ -48,6 +50,3 @@ def merge(a, b, path=None):
 
 def merge_hooks(default_target_dir, dest_dir, updated_filename):
     _merge_yaml(default_target_dir, dest_dir, updated_filename)
-
-
-# merge_hooks("./", "./", "yaml1.yml")
