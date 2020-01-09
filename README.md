@@ -63,6 +63,11 @@ If the filename ends with `.url` suffix, the content will be processed as an URL
   - description: If `METHOD` is set with `LIST`, the sidecar will just list config-maps and exit. Default is watch.
   - required: false
   - type: string
+  
+- `MERGE_YAML`
+  - description: Defines instruction sets on how to merge yaml files together. The value is defined as follows `base1.yaml,base2.yaml>output1.yaml:path.for.rule=merge;base3.yaml,base4.yaml>output2.yaml`
+  - required: false
+  - type: string
 
 - `REQ_URL`
   - description: URL to which send a request after a configmap got reloaded
